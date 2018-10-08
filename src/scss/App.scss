@@ -1,0 +1,18 @@
+@font-face {
+    font-family: 'GloriaHallelujah';
+    src: url('../resources/assets/fonts/GloriaHallelujah.ttf') 
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'GloriaHallelujah';
+}
+
+html, body, #root {
+    width: 100%;
+    height: 100%;
+}
