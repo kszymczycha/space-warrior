@@ -9,8 +9,8 @@ export default class Background extends Component {
 
     componentDidMount() {
         const canvas = this.canvasRef.current;
-        canvas.style.background = '#000000';
         const ctx = canvas.getContext('2d');
+        canvas.style.background = '#000000';
         ctx.canvas.width = window.innerWidth;
         ctx.canvas.height = window.innerHeight;
     }
