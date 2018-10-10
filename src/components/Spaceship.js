@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export default class Background extends Component {
+export default class Spaceship extends Component {
 
     constructor(props) {
         super(props);
@@ -10,7 +10,7 @@ export default class Background extends Component {
     componentDidMount() {
         const canvas = this.canvasRef.current;
         const ctx = canvas.getContext('2d');
-        canvas.style.background = '#000000';
+        canvas.style.marginTop = -window.innerHeight + "px";
         canvas.style.display = 'block';
         ctx.canvas.width = window.innerWidth;
         ctx.canvas.height = window.innerHeight;
@@ -19,5 +19,4 @@ export default class Background extends Component {
     render() {
         return <canvas ref={this.canvasRef}/>
     }
-
 }
