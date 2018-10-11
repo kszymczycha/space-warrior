@@ -10,7 +10,7 @@ export default class Spaceship extends Component {
     componentDidMount() {
         const canvas = this.canvasRef.current;
         const ctx = canvas.getContext('2d');
-        canvas.style.marginTop = -window.innerHeight + "px";
+        canvas.style.marginTop = -window.innerHeight + 'px';
         canvas.style.display = 'block';
         ctx.canvas.width = window.innerWidth;
         ctx.canvas.height = window.innerHeight;
