@@ -1,4 +1,12 @@
-.startGameBtn {
-    text-decoration: none;
-    color: #FFFFFF;
+@import 'variables';
+
+.menu {
+    h2 {
+        text-align: center;
+
+        .startGameBtn {
+            text-decoration: none;
+            color: $color-white;
+        }
+    }
 }
