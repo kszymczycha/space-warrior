@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
+import { SET_START_POSITION_X, SET_START_POSITION_Y } from '../actions';
 import spriteElement from '../spriteElement';
 import img from '../resources/assets/spritesheets/sheet.png';
 
-export default class Spaceship extends Component {
+class Spaceship extends Component {
 
     constructor(props) {
         super(props);
@@ -13,7 +15,8 @@ export default class Spaceship extends Component {
         const marginBottom = 10;
         const startX = (windowInnerWidth / 2) - (width / 2);
         const startY = windowInnetHeight - height - marginBottom;
-        return { startX, startY }
+        this.props.setStartPositionX(startX);
+        this.props.setStartPositionY(startY);
     }
 
     componentDidMount() {
@@ -31,8 +34,8 @@ export default class Spaceship extends Component {
             const element = spriteElement('playerShip2_blue');
             element.then(data => {
                 const { x, y, width, height} = data.$;
-                const { startX , startY } = this.startPosition(windowInnerWidth, windowInnetHeight, width, height);
-                ctx.drawImage(imgSprite, x, y, width, height, startX, startY, width, height);
+                this.startPosition(windowInnerWidth, windowInnetHeight, width, height);
+                ctx.drawImage(imgSprite, x, y, width, height, this.props.spaceshipX, this.props.spaceshipY, width, height);
             });
         }
     }
@@ -42,3 +45,29 @@ export default class Spaceship extends Component {
     }
 
 }
+
+const mapStateToProps = (state) => {
+    return {
+        spaceshipX: state.spaceshipX,
+        spaceshipY: state.spaceshipY
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setStartPositionX: (x) => {
+            dispatch({
+                type: SET_START_POSITION_X,
+                payload: x
+            });
+        },
+        setStartPositionY: (y) => {
+            dispatch({
+                type: SET_START_POSITION_Y,
+                payload: y
+            });
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Spaceship); 
