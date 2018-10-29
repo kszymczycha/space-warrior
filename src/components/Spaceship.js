@@ -18,24 +18,30 @@ class Spaceship extends Component {
         this.props.setStartPositionX(startX);
         this.props.setStartPositionY(startY);
     }
+    componentDidUpdate() {
+        this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+        this.ctx.drawImage(this.imgSprite, this.x, this.y, this.width, this.height, this.props.spaceshipX, this.props.spaceshipY, this.width, this.height);
+    }
 
     componentDidMount() {
         const canvas = this.canvasRef.current;
-        const ctx = canvas.getContext('2d');
-        const imgSprite = new Image();
-        const windowInnerWidth = window.innerWidth;
-        const windowInnetHeight = window.innerHeight;
+        this.ctx = canvas.getContext('2d');
+        this.imgSprite = new Image();
         canvas.style.marginTop = -window.innerHeight + 'px';
         canvas.style.display = 'block';
-        ctx.canvas.width = windowInnerWidth;
-        ctx.canvas.height = windowInnetHeight;
-        imgSprite.src = img;
-        imgSprite.onload = () => {
+        this.ctx.canvas.width = window.innerWidth;
+        this.ctx.canvas.height = window.innerHeight;
+        this.imgSprite.src = img;
+        this.imgSprite.onload = () => {
             const element = spriteElement('playerShip2_blue');
             element.then(data => {
                 const { x, y, width, height} = data.$;
-                this.startPosition(windowInnerWidth, windowInnetHeight, width, height);
-                ctx.drawImage(imgSprite, x, y, width, height, this.props.spaceshipX, this.props.spaceshipY, width, height);
+                this.x = x;
+                this.y = y;
+                this.width = width;
+                this.height = height;
+                this.startPosition(this.ctx.canvas.width, this.ctx.canvas.height, width, height);
+                this.ctx.drawImage(this.imgSprite, this.x, this.y, this.width, this.height, this.props.spaceshipX, this.props.spaceshipY, this.width, this.height);
             });
         }
     }
