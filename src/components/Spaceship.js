@@ -20,17 +20,17 @@ class Spaceship extends Component {
     }
     componentDidUpdate() {
         this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
-        this.ctx.drawImage(this.imgSprite, this.x, this.y, this.width, this.height, this.props.spaceshipX, this.props.spaceshipY, this.width, this.height);
+        this.ctx.drawImage(
+            this.imgSprite, this.x, this.y, 
+            this.width, this.height, this.props.spaceshipX, 
+            this.props.spaceshipY, this.width, this.height
+            );
     }
 
     componentDidMount() {
         const canvas = this.canvasRef.current;
         this.ctx = canvas.getContext('2d');
         this.imgSprite = new Image();
-        canvas.style.marginTop = -window.innerHeight + 'px';
-        canvas.style.display = 'block';
-        this.ctx.canvas.width = window.innerWidth;
-        this.ctx.canvas.height = window.innerHeight;
         this.imgSprite.src = img;
         this.imgSprite.onload = () => {
             const element = spriteElement('playerShip2_blue');
@@ -41,13 +41,22 @@ class Spaceship extends Component {
                 this.width = width;
                 this.height = height;
                 this.startPosition(this.ctx.canvas.width, this.ctx.canvas.height, width, height);
-                this.ctx.drawImage(this.imgSprite, this.x, this.y, this.width, this.height, this.props.spaceshipX, this.props.spaceshipY, this.width, this.height);
+                this.ctx.drawImage(
+                    this.imgSprite, this.x, this.y, 
+                    this.width, this.height, this.props.spaceshipX, 
+                    this.props.spaceshipY, this.width, this.height
+                    );
             });
         }
     }
 
     render() {
-        return <canvas ref={this.canvasRef}/>
+        return <canvas 
+            width={window.innerWidth} 
+            height={window.innerHeight} 
+            style={{'marginTop': -window.innerHeight + 'px', 'display': 'block'}} 
+            ref={this.canvasRef}
+            />
     }
 
 }
