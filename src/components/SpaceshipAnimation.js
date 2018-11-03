@@ -8,15 +8,24 @@ import {
     SPACESHIP_MOVE_LEFT 
 } from '../actions';
 
+const KEY = {
+    UP: 38,
+    DOWN: 40,
+    RIGHT: 39,
+    LEFT: 37
+}
+
 class SpaceshipAnimation extends Component {
 
     constructor(props) {
         super(props);
         this.updateAnimationState = this.updateAnimationState.bind(this);
+        this.keys = [];
     }
 
     componentDidMount() {
-        document.addEventListener('keydown', this.handleKayDown.bind(this));
+        document.addEventListener('keydown', this.handleKeyDown.bind(this));
+        document.addEventListener('keyup', this.handleKeyUp.bind(this));
         this.rAF = requestAnimationFrame(this.updateAnimationState);
     }
 
@@ -24,23 +33,28 @@ class SpaceshipAnimation extends Component {
         this.rAF = requestAnimationFrame(this.updateAnimationState); 
     }
 
-    handleKayDown(e) {
-        switch (e.keyCode) {
-            case 38:
-                this.props.moveUp();
-                return;
-            case 40:
-                this.props.moveDown();
-                return;
-            case 39:
-                this.props.moveRight();
-                return;
-            case 37:
-                this.props.moveLeft();
-                return;
-            default:
-                return;
+    handleKeyDown(e) {
+        this.keys[e.keyCode] = true;
+
+        if (this.keys[KEY.UP]) {
+            this.props.moveUp();
         }
+
+        if (this.keys[KEY.DOWN]) {
+            this.props.moveDown();
+        }
+
+        if (this.keys[KEY.RIGHT]) {
+            this.props.moveRight();
+        }
+
+        if (this.keys[KEY.LEFT]) {
+            this.props.moveLeft();
+        }
+    }
+
+    handleKeyUp(e) {
+        this.keys[e.keyCode] = false;
     }
 
     render() {

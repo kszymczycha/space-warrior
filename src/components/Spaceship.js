@@ -12,9 +12,8 @@ class Spaceship extends Component {
     }
     
     startPosition(windowInnerWidth, windowInnetHeight, width, height) {
-        const marginBottom = 10;
         const startX = (windowInnerWidth / 2) - (width / 2);
-        const startY = windowInnetHeight - height - marginBottom;
+        const startY = windowInnetHeight - height;
         this.props.setStartPositionX(startX);
         this.props.setStartPositionY(startY);
     }
