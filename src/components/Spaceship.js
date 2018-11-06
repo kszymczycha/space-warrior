@@ -26,6 +26,21 @@ class Spaceship extends Component {
             );
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        const spaceshipX = this.props.spaceshipX;
+        const spaceshipY = this.props.spaceshipY;
+
+        if (spaceshipX <= 0 || spaceshipX >= (this.ctx.canvas.width - this.width)) {
+            return false;
+        }
+
+        if (spaceshipY <= 0 || spaceshipY >= (this.ctx.canvas.height - this.height)) {
+            return false;
+        }
+
+        return true;
+    }
+
     componentDidMount() {
         const canvas = this.canvasRef.current;
         this.ctx = canvas.getContext('2d');
